@@ -1,13 +1,17 @@
 import { useNavigate } from 'react-router-dom';
 import WordForm from '../components/WordForm';
 import { useAuth } from '../auth/useAuth';
+import { useSettings } from '../db/useSettings';
 import { addWord, type WordInput } from '../db/words';
+import { getProvider } from '../providers';
 
-// Pantalla "Agregar". Por ahora captura manual; el autocompletado desde el
-// diccionario gratuito (botón "Buscar definición") se añade en la Fase 4.
+// Pantalla "Agregar": captura una palabra con autocompletado desde el
+// proveedor de definiciones elegido en Ajustes (US-01, US-02, US-12).
 export default function Add() {
   const { user } = useAuth();
+  const { settings } = useSettings();
   const navigate = useNavigate();
+  const provider = getProvider(settings.definitionProvider);
 
   async function handleSubmit(input: WordInput) {
     if (!user) return;
@@ -21,13 +25,12 @@ export default function Add() {
         <h1 className="screen__title">Agregar palabra</h1>
       </header>
       <p className="screen__text">
-        Escribe la palabra y, si quieres, su definición. Puedes guardar solo el
-        término y completarla después.
+        {provider.canFetch
+          ? 'Escribe la palabra y toca “Buscar definición”, o complétala a mano. Puedes guardar solo el término.'
+          : 'Captura manual activa. Escribe los campos a mano; puedes guardar solo el término.'}
       </p>
 
-      <WordForm submitLabel="Guardar palabra" onSubmit={handleSubmit} />
-
-      <p className="screen__badge">Autocompletado del diccionario · Fase 4</p>
+      <WordForm submitLabel="Guardar palabra" onSubmit={handleSubmit} provider={provider} />
     </section>
   );
 }

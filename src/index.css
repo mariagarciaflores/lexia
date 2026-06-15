@@ -325,6 +325,75 @@ body {
   flex: 1;
 }
 
+/* ---------- Buscar definición (autocompletado) ---------- */
+.lookup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: -4px;
+}
+
+.lookup__msg {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  line-height: 1.4;
+}
+
+/* ---------- Lista de opciones (Ajustes) ---------- */
+.option-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  text-align: left;
+  width: 100%;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  cursor: pointer;
+}
+
+.option--active {
+  border-color: var(--color-primary);
+  background: #eef2ff;
+}
+
+.option__radio {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  border-radius: 50%;
+  border: 2px solid var(--color-border);
+}
+
+.option--active .option__radio {
+  border-color: var(--color-primary);
+  background:
+    radial-gradient(circle, var(--color-primary) 0 4px, transparent 5px);
+}
+
+.option__name {
+  display: block;
+  font-weight: 600;
+}
+
+.option__desc {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  margin-top: 2px;
+  line-height: 1.4;
+}
+
 /* ---------- Toolbar (buscar + ordenar) ---------- */
 .toolbar {
   display: flex;

@@ -1,13 +1,15 @@
-import { useState, type FormEvent, type ReactNode } from 'react';
+import { useState, type FormEvent } from 'react';
 import type { Word, WordInput } from '../db/words';
+import { WordNotFoundError, type DefinitionProvider } from '../providers';
 
 type Props = {
   initial?: Partial<Word>;
   submitLabel: string;
   onSubmit: (input: WordInput) => Promise<void>;
   onCancel?: () => void;
-  // Contenido extra (p. ej. el botón "Buscar definición" en la Fase 4).
-  extraActions?: ReactNode;
+  // Proveedor de definiciones (Fase 4). Si puede autocompletar, se muestra el
+  // botón "Buscar definición".
+  provider?: DefinitionProvider;
 };
 
 // Formulario de captura/edición de una palabra. Todos los campos son editables;
@@ -17,7 +19,7 @@ export default function WordForm({
   submitLabel,
   onSubmit,
   onCancel,
-  extraActions,
+  provider,
 }: Props) {
   const [term, setTerm] = useState(initial?.term ?? '');
   const [definition, setDefinition] = useState(initial?.definition ?? '');
@@ -26,6 +28,41 @@ export default function WordForm({
   const [source, setSource] = useState(initial?.source ?? '');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [lookingUp, setLookingUp] = useState(false);
+  const [lookupMsg, setLookupMsg] = useState<string | null>(null);
+
+  const canLookup = provider?.canFetch ?? false;
+
+  async function handleLookup() {
+    if (!term.trim() || !provider) return;
+    setLookupMsg(null);
+
+    // El autocompletado requiere red (US-11): avisa si no hay.
+    if (typeof navigator !== 'undefined' && navigator.onLine === false) {
+      setLookupMsg('Sin conexión: escribe la definición a mano.');
+      return;
+    }
+
+    setLookingUp(true);
+    try {
+      const result = await provider.getDefinition(term);
+      setDefinition(result.definition);
+      setExample(result.example);
+      setSynonyms(result.synonyms.join(', '));
+      if (!result.example && result.synonyms.length === 0) {
+        setLookupMsg('Definición encontrada. Sin ejemplo ni sinónimos: complétalos a mano.');
+      }
+    } catch (err) {
+      if (err instanceof WordNotFoundError) {
+        setLookupMsg('No se encontró esa palabra. Escribe la definición a mano.');
+      } else {
+        console.error(err);
+        setLookupMsg('No se pudo consultar el diccionario. Inténtalo de nuevo o escríbela a mano.');
+      }
+    } finally {
+      setLookingUp(false);
+    }
+  }
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -61,7 +98,19 @@ export default function WordForm({
         />
       </label>
 
-      {extraActions}
+      {canLookup && (
+        <div className="lookup">
+          <button
+            className="btn"
+            type="button"
+            onClick={handleLookup}
+            disabled={lookingUp || !term.trim()}
+          >
+            {lookingUp ? 'Buscando…' : 'Buscar definición'}
+          </button>
+          {lookupMsg && <p className="lookup__msg">{lookupMsg}</p>}
+        </div>
+      )}
 
       <label className="field">
         <span className="field__label">Definición</span>
