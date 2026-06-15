@@ -3,7 +3,7 @@
 PWA para coleccionar y memorizar el vocabulario nuevo que descubres al leer.
 Construida con **React + TypeScript + Vite**, desplegada en **Firebase**.
 
-> Estado: **Fase 2 — autenticación**. Login con Google y enlace por correo (magic link), rutas protegidas, creación de perfil `users/{uid}` y cierre de sesión. La navegación, PWA y la base de Firebase/seguridad ya estaban listas en la Fase 1; el resto de las funciones se implementa en las fases siguientes (ver `especificacion-app-vocabulario.md`).
+> Estado: **Fase 3 — datos**. Modelo `Word` y CRUD en Firestore (subcolección por usuario), persistencia offline, y pantalla "Mis palabras" con buscador, orden y detalle editable/borrable. La captura "Agregar" funciona de forma manual; el autocompletado desde el diccionario llega en la Fase 4. (Fases previas: 1 esqueleto, 2 autenticación.) Ver `especificacion-app-vocabulario.md`.
 
 ## Autenticación (Fase 2)
 
