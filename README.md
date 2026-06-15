@@ -3,7 +3,7 @@
 PWA para coleccionar y memorizar el vocabulario nuevo que descubres al leer.
 Construida con **React + TypeScript + Vite**, desplegada en **Firebase**.
 
-> Estado: **Fase 5 — repaso**. Repaso espaciado SM-2 simplificado con flashcards (voltear + calificar "La sabía / Más o menos / No la sabía") e Inicio con pendientes del día y "palabras del día". (Fases previas: 1 esqueleto, 2 autenticación, 3 datos/CRUD, 4 diccionario.) Ver `especificacion-app-vocabulario.md`.
+> Estado: **Fase 6 — juego**. Mini-juego "adivina la palabra": opción múltiple con una definición y 4 términos, marca acierto/error y lleva puntaje. (Fases previas: 1 esqueleto, 2 autenticación, 3 datos/CRUD, 4 diccionario, 5 repaso.) Ver `especificacion-app-vocabulario.md`.
 
 ## Autenticación (Fase 2)
 
