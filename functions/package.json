@@ -1,0 +1,21 @@
+{
+  "name": "lexia-functions",
+  "description": "Cloud Functions de Lexia: notificación programada de palabra del día",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "20"
+  },
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "tsc",
+    "deploy": "firebase deploy --only functions"
+  },
+  "dependencies": {
+    "firebase-admin": "^12.6.0",
+    "firebase-functions": "^5.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.3"
+  }
+}

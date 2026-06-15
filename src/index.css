@@ -731,6 +731,68 @@ body {
   color: #dc2626;
 }
 
+/* ---------- Notificaciones (Ajustes) ---------- */
+.toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.switch {
+  flex: none;
+  width: 48px;
+  height: 28px;
+  border-radius: 999px;
+  border: none;
+  background: var(--color-border);
+  position: relative;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.switch--on {
+  background: var(--color-primary);
+}
+
+.switch__knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 0.15s;
+}
+
+.switch--on .switch__knob {
+  transform: translateX(20px);
+}
+
+.switch:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.notif-options {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.field--row {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.input--compact {
+  width: auto;
+  padding: 8px 10px;
+}
+
 /* ---------- Carga ---------- */
 .loading {
   min-height: 100vh;

@@ -3,7 +3,7 @@
 PWA para coleccionar y memorizar el vocabulario nuevo que descubres al leer.
 Construida con **React + TypeScript + Vite**, desplegada en **Firebase**.
 
-> Estado: **Fase 6 — juego**. Mini-juego "adivina la palabra": opción múltiple con una definición y 4 términos, marca acierto/error y lleva puntaje. (Fases previas: 1 esqueleto, 2 autenticación, 3 datos/CRUD, 4 diccionario, 5 repaso.) Ver `especificacion-app-vocabulario.md`.
+> Estado: **Fase 7 — notificaciones + deploy**. Notificaciones push de la palabra del día con FCM + Cloud Functions (Cloud Scheduler), configurables en Ajustes (hora y cantidad), y despliegue en Firebase Hosting. App completa según la especificación. (Fases previas: 1 esqueleto, 2 auth, 3 datos, 4 diccionario, 5 repaso, 6 juego.)
 
 ## Autenticación (Fase 2)
 
@@ -49,10 +49,38 @@ Para que el login funcione en tu proyecto Firebase:
 
 1. Inicia sesión: `firebase login`
 2. Pon tu Project ID en `.firebaserc` (reemplaza `TU_PROJECT_ID_DE_FIREBASE`).
-3. Despliega:
+3. Despliega Hosting + reglas:
    ```bash
-   npm run deploy
+   npm run deploy        # build + firebase deploy
    ```
+
+## Notificaciones push (Fase 7)
+
+La palabra del día llega por **FCM** y la envía una **Cloud Function programada**
+(Cloud Scheduler) a la hora local de cada usuaria.
+
+**Requisitos previos:**
+
+1. **Plan Blaze** (Cloud Functions y Scheduler lo exigen): Console → *Uso y
+   facturación* → *Modificar plan* → Blaze.
+2. **Clave Web Push (VAPID):** Console → *Configuración del proyecto* → *Cloud
+   Messaging* → *Web Push certificates* → *Generar par de claves*. Cópiala en
+   `.env` como `VITE_FIREBASE_VAPID_KEY` (es pública).
+
+**Despliegue de las funciones:**
+
+```bash
+cd functions && npm install && cd ..
+firebase deploy --only functions        # acepta habilitar las APIs que pida
+# o todo junto:
+npm run deploy && firebase deploy --only functions
+```
+
+- La función `sendDailyWords` corre cada 15 min y notifica a quien tenga la hora
+  configurada en ese intervalo (sin repetir el mismo día).
+- El service worker `public/firebase-messaging-sw.js` recibe el push en segundo
+  plano; al tocar la notificación se abre el detalle de la palabra.
+- En **iOS** las notificaciones requieren la PWA **instalada** y permiso concedido.
 
 ## Seguridad
 
@@ -65,11 +93,16 @@ Para que el login funcione en tu proyecto Firebase:
 
 ```
 src/
-  firebase/   Configuración de Firebase (Auth, Firestore)
+  firebase/   Configuración de Firebase (Auth, Firestore, Messaging)
+  auth/       Contexto de autenticación y rutas protegidas
   pages/      Una pantalla por sección
-  components/ Componentes reutilizables (navegación, etc.)
-  providers/  Proveedores de definiciones (Fase 4)
-  db/         Acceso a datos / Firestore helpers (Fase 3)
-firestore.rules  Reglas de seguridad
-firebase.json    Config de Hosting + Firestore
+  components/ Componentes reutilizables (navegación, formularios, etc.)
+  providers/  Proveedores de definiciones (diccionario / manual)
+  db/         Acceso a datos / Firestore helpers (palabras, ajustes)
+  review/     Repaso espaciado (SM-2 simplificado)
+  game/       Lógica del mini-juego
+functions/        Cloud Functions (notificación programada con FCM)
+public/firebase-messaging-sw.js  Service worker de notificaciones
+firestore.rules   Reglas de seguridad
+firebase.json     Config de Hosting + Firestore + Functions
 ```

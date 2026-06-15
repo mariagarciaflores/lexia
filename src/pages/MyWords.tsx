@@ -1,5 +1,5 @@
-import { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useMemo, useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../auth/useAuth';
 import { useWords } from '../db/useWords';
 import { isIncomplete, type Word } from '../db/words';
@@ -13,6 +13,18 @@ export default function MyWords() {
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState<SortKey>('recientes');
   const [selected, setSelected] = useState<Word | null>(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  // Si se llega con ?word=<id> (al tocar una notificación), abre ese detalle.
+  const wordParam = searchParams.get('word');
+  useEffect(() => {
+    if (!wordParam || words.length === 0) return;
+    const match = words.find((w) => w.id === wordParam);
+    if (match) {
+      setSelected(match);
+      setSearchParams({}, { replace: true });
+    }
+  }, [wordParam, words, setSearchParams]);
 
   const visible = useMemo(() => {
     const q = search.trim().toLowerCase();

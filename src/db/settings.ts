@@ -9,6 +9,8 @@ export type UserSettings = {
   notificationsEnabled: boolean;
   notificationTime: string; // "08:00"
   wordsPerNotification: number; // 1-3
+  timezone?: string; // IANA, p. ej. "America/Mexico_City" (para enviar a la hora local)
+  lastNotifiedDate?: string; // YYYY-MM-DD; lo escribe la Cloud Function (anti-duplicados)
 };
 
 export const DEFAULT_SETTINGS: UserSettings = {

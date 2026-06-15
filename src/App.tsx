@@ -1,7 +1,9 @@
+import { useEffect } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import BottomNav from './components/BottomNav';
 import ProtectedRoute from './components/ProtectedRoute';
 import { useAuth } from './auth/useAuth';
+import { initForegroundNotifications } from './firebase/messaging';
 import Login from './pages/Login';
 import Home from './pages/Home';
 import Add from './pages/Add';
@@ -14,6 +16,11 @@ export default function App() {
   const location = useLocation();
   const { user } = useAuth();
   const isLogin = location.pathname === '/login';
+
+  // Muestra las notificaciones que llegan con la app abierta (si hay permiso).
+  useEffect(() => {
+    if (user) initForegroundNotifications();
+  }, [user]);
 
   return (
     <div className="app">

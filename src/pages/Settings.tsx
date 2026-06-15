@@ -4,6 +4,7 @@ import { logout } from '../firebase/auth';
 import { useSettings } from '../db/useSettings';
 import { updateSettings } from '../db/settings';
 import { PROVIDERS, type ProviderId } from '../providers';
+import NotificationsSettings from '../components/NotificationsSettings';
 
 export default function Settings() {
   const { user } = useAuth();
@@ -68,11 +69,11 @@ export default function Settings() {
         </div>
       </div>
 
+      <NotificationsSettings />
+
       <button className="btn" onClick={handleLogout} disabled={busy}>
         {busy ? 'Cerrando…' : 'Cerrar sesión'}
       </button>
-
-      <p className="screen__badge">Notificaciones · Fase 7</p>
     </section>
   );
 }
