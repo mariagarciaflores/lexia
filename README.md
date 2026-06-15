@@ -3,7 +3,15 @@
 PWA para coleccionar y memorizar el vocabulario nuevo que descubres al leer.
 Construida con **React + TypeScript + Vite**, desplegada en **Firebase**.
 
-> Estado: **Fase 1 — esqueleto del proyecto**. Navegación, PWA y la base de Firebase/seguridad están listas; el resto de las funciones se implementa en las fases siguientes (ver `especificacion-app-vocabulario.md`).
+> Estado: **Fase 2 — autenticación**. Login con Google y enlace por correo (magic link), rutas protegidas, creación de perfil `users/{uid}` y cierre de sesión. La navegación, PWA y la base de Firebase/seguridad ya estaban listas en la Fase 1; el resto de las funciones se implementa en las fases siguientes (ver `especificacion-app-vocabulario.md`).
+
+## Autenticación (Fase 2)
+
+Para que el login funcione en tu proyecto Firebase:
+
+1. **Firebase Console → Authentication → Sign-in method**: habilita **Google** y **Correo electrónico/contraseña → Vínculo de correo electrónico (sin contraseña)**.
+2. **Authentication → Settings → Dominios autorizados**: deja `localhost` y añade tu dominio de Hosting.
+3. El enlace por correo vuelve a `/<origin>/login`; ese mismo `origin` debe estar entre los dominios autorizados.
 
 ## Requisitos
 

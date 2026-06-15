@@ -186,3 +186,111 @@ body {
   font-size: 0.85rem;
   margin: 4px 0;
 }
+
+.login__form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.login__divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--color-muted);
+  font-size: 0.8rem;
+  margin: 4px 0;
+}
+
+.login__divider::before,
+.login__divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+}
+
+.login__sent {
+  text-align: center;
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+.login__error {
+  text-align: center;
+  color: #b91c1c;
+  font-size: 0.88rem;
+  margin: 0;
+}
+
+/* ---------- Campos de formulario ---------- */
+.input {
+  width: 100%;
+  padding: 13px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 1rem;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px #c7d2fe;
+}
+
+/* ---------- Tarjeta (Ajustes) ---------- */
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  padding: 16px;
+  margin: 16px 0;
+}
+
+.card__label {
+  margin: 0 0 4px;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+}
+
+.card__value {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.card__sub {
+  margin: 2px 0 0;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+/* ---------- Carga ---------- */
+.loading {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--color-muted);
+}
+
+.loading__spinner {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
