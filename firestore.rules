@@ -1,0 +1,18 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Cada usuario solo puede leer y escribir sus propios datos.
+    // Todo vive bajo users/{uid}/** y el acceso exige que el uid autenticado
+    // coincida con el del documento.
+    match /users/{uid}/{document=**} {
+      allow read, write: if request.auth != null && request.auth.uid == uid;
+    }
+
+    // Cualquier otra ruta queda denegada por defecto.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

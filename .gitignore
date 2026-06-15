@@ -1,0 +1,40 @@
+# Dependencias
+node_modules
+.pnp
+.pnp.js
+
+# Build
+dist
+dist-ssr
+*.local
+*.tsbuildinfo
+vite.config.ts.timestamp-*.mjs
+
+# Variables de entorno — NUNCA subir secretos/llaves
+.env
+.env.local
+.env.*.local
+
+# Credenciales de Firebase / cuentas de servicio (Admin SDK)
+serviceAccount*.json
+*-firebase-adminsdk-*.json
+.firebase
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+
+# Editor / SO
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
