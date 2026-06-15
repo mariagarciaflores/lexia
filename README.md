@@ -3,7 +3,7 @@
 PWA para coleccionar y memorizar el vocabulario nuevo que descubres al leer.
 Construida con **React + TypeScript + Vite**, desplegada en **Firebase**.
 
-> Estado: **Fase 4 — agregar + diccionario**. Módulo `DefinitionProvider` (Free Dictionary gratis + Manual), botón "Buscar definición" con autocompletado en "Agregar", y selector de proveedor en Ajustes. (Fases previas: 1 esqueleto, 2 autenticación, 3 datos/CRUD.) Ver `especificacion-app-vocabulario.md`.
+> Estado: **Fase 5 — repaso**. Repaso espaciado SM-2 simplificado con flashcards (voltear + calificar "La sabía / Más o menos / No la sabía") e Inicio con pendientes del día y "palabras del día". (Fases previas: 1 esqueleto, 2 autenticación, 3 datos/CRUD, 4 diccionario.) Ver `especificacion-app-vocabulario.md`.
 
 ## Autenticación (Fase 2)
 

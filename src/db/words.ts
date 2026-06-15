@@ -117,3 +117,18 @@ export async function updateWord(
 export async function deleteWord(uid: string, id: string): Promise<void> {
   await deleteDoc(doc(db, 'users', uid, 'words', id));
 }
+
+// Campos de repaso espaciado que se recalculan al calificar (Fase 5).
+export type ReviewFields = Pick<
+  Word,
+  'easeFactor' | 'interval' | 'dueDate' | 'reviewsCount' | 'lapses'
+>;
+
+/** Guarda el resultado de un repaso (SM-2) en la palabra. */
+export async function saveReview(
+  uid: string,
+  id: string,
+  fields: ReviewFields,
+): Promise<void> {
+  await updateDoc(doc(db, 'users', uid, 'words', id), fields);
+}

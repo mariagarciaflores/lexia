@@ -548,6 +548,110 @@ body {
   font-size: 0.9rem;
 }
 
+/* ---------- Inicio ---------- */
+.card--accent {
+  border-color: var(--color-primary);
+  background: linear-gradient(160deg, #eef2ff, var(--color-surface));
+}
+
+.home__count {
+  font-size: 2.6rem;
+  font-weight: 700;
+  margin: 4px 0 12px;
+  color: var(--color-primary-dark);
+}
+
+.home__subtitle {
+  font-size: 1.05rem;
+  margin: 22px 0 10px;
+}
+
+/* ---------- Flashcard (repaso) ---------- */
+.flashcard {
+  width: 100%;
+  min-height: 220px;
+  margin: 16px 0;
+  padding: 24px 20px;
+  border-radius: 18px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  text-align: center;
+}
+
+.flashcard__term {
+  font-size: 1.9rem;
+  font-weight: 700;
+}
+
+.flashcard__back {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.flashcard__def {
+  font-size: 1.15rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.flashcard__example {
+  color: var(--color-muted);
+  font-style: italic;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.flashcard__hint {
+  font-size: 0.78rem;
+  color: var(--color-muted);
+}
+
+.grade-row {
+  display: flex;
+  gap: 8px;
+}
+
+.grade-row .btn {
+  flex: 1;
+  padding: 14px 8px;
+}
+
+/* ---------- Resumen de repaso ---------- */
+.summary {
+  text-align: center;
+  margin-top: 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.summary__title {
+  margin: 0;
+}
+
+.summary__count {
+  color: var(--color-muted);
+  margin: 0;
+}
+
+.summary__list {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
 /* ---------- Carga ---------- */
 .loading {
   min-height: 100vh;
