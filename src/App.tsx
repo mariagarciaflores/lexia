@@ -1,6 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
-import BottomNav from './components/BottomNav';
+import AppBar from './components/AppBar';
+import NavDrawer from './components/NavDrawer';
+import Sidebar from './components/Sidebar';
+import TopBar from './components/TopBar';
 import ProtectedRoute from './components/ProtectedRoute';
 import { useAuth } from './auth/useAuth';
 import { initForegroundNotifications } from './firebase/messaging';
@@ -13,20 +16,30 @@ import Play from './pages/Play';
 import Settings from './pages/Settings';
 
 export default function App() {
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const location = useLocation();
   const { user } = useAuth();
   const isLogin = location.pathname === '/login';
 
-  // Muestra las notificaciones que llegan con la app abierta (si hay permiso).
   useEffect(() => {
     if (user) initForegroundNotifications();
   }, [user]);
 
+  const chrome = !isLogin && user;
+
   return (
-    <div className="app">
-      <main className="app__content">
-        <Routes>
-          {/* Si ya hay sesión, /login redirige a Inicio. */}
+    <div className={chrome ? 'app app--chrome' : 'app'}>
+      {chrome && <Sidebar />}
+      <div className="app__shell">
+        {chrome && (
+          <>
+            <AppBar onMenuClick={() => setDrawerOpen(true)} />
+            <NavDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} />
+            <TopBar />
+          </>
+        )}
+        <main className="app__content">
+          <Routes>
           <Route
             path="/login"
             element={user ? <Navigate to="/" replace /> : <Login />}
@@ -79,10 +92,10 @@ export default function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </main>
-      {!isLogin && user && <BottomNav />}
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </main>
+      </div>
     </div>
   );
 }

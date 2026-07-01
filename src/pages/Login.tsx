@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import { FirebaseError } from 'firebase/app';
 import { sendEmailSignInLink, signInWithGoogle } from '../firebase/auth';
+import LexiaLogo from '../components/LexiaLogo';
 
 // Pantalla de login (US-00): "Continuar con Google" y enlace mágico por correo.
 // La redirección tras autenticar la maneja App/AuthProvider.
@@ -43,7 +44,7 @@ export default function Login() {
     <section className="login">
       <div className="login__brand">
         <div className="login__logo" aria-hidden="true">
-          L
+          <LexiaLogo size={72} />
         </div>
         <h1 className="login__title">Lexia</h1>
         <p className="login__tagline">
