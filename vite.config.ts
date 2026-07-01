@@ -8,13 +8,13 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg', 'robots.txt'],
+      includeAssets: ['favicon.svg', 'robots.txt', 'apple-touch-icon-180x180.png'],
       manifest: {
         name: 'Lexia',
         short_name: 'Lexia',
         description: 'Colecciona y memoriza el vocabulario nuevo que descubres al leer.',
-        theme_color: '#4f46e5',
-        background_color: '#ffffff',
+        theme_color: '#cb48b7',
+        background_color: '#faf8f3',
         display: 'standalone',
         start_url: '/',
         icons: [
