@@ -1,0 +1,4 @@
+# Si cualquier paso falla (exit != 0), git aborta el commit.
+# 1) Lint + formato de los archivos en staging (ESLint --fix + Prettier --write).
+# 2) Verificación de tipos de todo el proyecto.
+npx lint-staged && npx tsc --noEmit

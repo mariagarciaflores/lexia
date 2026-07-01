@@ -1,0 +1,3 @@
+# Antes de subir: bloquea llaves privadas / código inseguro y vulnerabilidades
+# críticas de dependencias de producción. Cualquier fallo aborta el push.
+npm run check:secrets && npm audit --omit=dev --audit-level=critical
