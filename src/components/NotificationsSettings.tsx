@@ -36,7 +36,9 @@ export default function NotificationsSettings() {
             timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
           });
         } else if (result === 'denied') {
-          setMsg('Permiso de notificaciones denegado. Actívalo en los ajustes del navegador.');
+          setMsg(
+            'Permiso de notificaciones denegado. Actívalo en los ajustes del navegador.',
+          );
         } else {
           setMsg('Este navegador no soporta notificaciones push.');
         }

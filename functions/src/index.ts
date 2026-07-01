@@ -74,11 +74,17 @@ async function cleanInvalidTokens(
   tokens: string[],
   responses: { success: boolean; error?: { code: string } }[],
 ): Promise<void> {
-  const stale = ['messaging/registration-token-not-registered', 'messaging/invalid-argument'];
+  const stale = [
+    'messaging/registration-token-not-registered',
+    'messaging/invalid-argument',
+  ];
   await Promise.all(
     responses.map((res, i) => {
       if (!res.success && res.error && stale.includes(res.error.code)) {
-        return db.doc(`users/${uid}/fcmTokens/${tokens[i]}`).delete().catch(() => undefined);
+        return db
+          .doc(`users/${uid}/fcmTokens/${tokens[i]}`)
+          .delete()
+          .catch(() => undefined);
       }
       return undefined;
     }),
@@ -112,7 +118,8 @@ export const sendDailyWords = onSchedule(
       const tz = s.timezone || 'Etc/UTC';
       const local = localParts(now, tz);
 
-      if (!withinWindow(local.minutes, parseTime(s.notificationTime || '08:00'))) continue;
+      if (!withinWindow(local.minutes, parseTime(s.notificationTime || '08:00')))
+        continue;
       if (s.lastNotifiedDate === local.date) continue; // ya se envió hoy
 
       const tokens = await getTokens(uid);
@@ -136,7 +143,9 @@ export const sendDailyWords = onSchedule(
         const res = await getMessaging().sendEachForMulticast(message);
         await cleanInvalidTokens(uid, tokens, res.responses);
         await docSnap.ref.update({ lastNotifiedDate: local.date });
-        logger.info(`Notificación enviada a ${uid}: ${res.successCount}/${tokens.length}`);
+        logger.info(
+          `Notificación enviada a ${uid}: ${res.successCount}/${tokens.length}`,
+        );
       } catch (err) {
         logger.error(`Fallo al notificar a ${uid}`, err);
       }

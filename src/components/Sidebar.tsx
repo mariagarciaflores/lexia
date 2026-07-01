@@ -42,7 +42,8 @@ export default function Sidebar() {
       <div className="sidebar__theme">
         <button
           className={
-            'sidebar__theme-btn' + (theme === 'light' ? ' sidebar__theme-btn--active' : '')
+            'sidebar__theme-btn' +
+            (theme === 'light' ? ' sidebar__theme-btn--active' : '')
           }
           onClick={() => theme !== 'light' && toggle()}
         >

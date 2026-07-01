@@ -40,58 +40,58 @@ export default function App() {
         )}
         <main className="app__content">
           <Routes>
-          <Route
-            path="/login"
-            element={user ? <Navigate to="/" replace /> : <Login />}
-          />
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <Home />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/agregar"
-            element={
-              <ProtectedRoute>
-                <Add />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/palabras"
-            element={
-              <ProtectedRoute>
-                <MyWords />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/repasar"
-            element={
-              <ProtectedRoute>
-                <Review />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/jugar"
-            element={
-              <ProtectedRoute>
-                <Play />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/ajustes"
-            element={
-              <ProtectedRoute>
-                <Settings />
-              </ProtectedRoute>
-            }
-          />
+            <Route
+              path="/login"
+              element={user ? <Navigate to="/" replace /> : <Login />}
+            />
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute>
+                  <Home />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/agregar"
+              element={
+                <ProtectedRoute>
+                  <Add />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/palabras"
+              element={
+                <ProtectedRoute>
+                  <MyWords />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/repasar"
+              element={
+                <ProtectedRoute>
+                  <Review />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/jugar"
+              element={
+                <ProtectedRoute>
+                  <Play />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/ajustes"
+              element={
+                <ProtectedRoute>
+                  <Settings />
+                </ProtectedRoute>
+              }
+            />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>

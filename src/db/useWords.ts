@@ -30,7 +30,11 @@ export function useWords(): WordsState {
       (words) => setState({ words, loading: false, error: null }),
       (error) => {
         console.error('Error al leer las palabras:', error);
-        setState({ words: [], loading: false, error: 'No se pudieron cargar tus palabras.' });
+        setState({
+          words: [],
+          loading: false,
+          error: 'No se pudieron cargar tus palabras.',
+        });
       },
     );
     return unsubscribe;

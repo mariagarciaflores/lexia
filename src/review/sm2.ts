@@ -31,11 +31,7 @@ export function isDue(word: Word, now: number = Date.now()): boolean {
  * Calcula el nuevo estado de repaso a partir de la calificación.
  * Determinista: dado un Word + Grade + now, siempre devuelve lo mismo.
  */
-export function review(
-  word: Word,
-  grade: Grade,
-  now: number = Date.now(),
-): ReviewState {
+export function review(word: Word, grade: Grade, now: number = Date.now()): ReviewState {
   let easeFactor = word.easeFactor;
   let interval = word.interval;
   let lapses = word.lapses;

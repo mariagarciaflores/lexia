@@ -73,8 +73,7 @@ export default function MyWords() {
     const filtered = q
       ? words.filter(
           (w) =>
-            w.term.toLowerCase().includes(q) ||
-            w.definition.toLowerCase().includes(q),
+            w.term.toLowerCase().includes(q) || w.definition.toLowerCase().includes(q),
         )
       : words;
 
@@ -85,9 +84,7 @@ export default function MyWords() {
   }, [words, search, sort]);
 
   // Mantiene la palabra abierta sincronizada con los datos en vivo (tras editar).
-  const openWord = selected
-    ? (words.find((w) => w.id === selected.id) ?? null)
-    : null;
+  const openWord = selected ? (words.find((w) => w.id === selected.id) ?? null) : null;
 
   return (
     <section className="screen">

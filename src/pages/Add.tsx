@@ -30,7 +30,11 @@ export default function Add() {
           : 'Captura manual activa. Escribe los campos a mano; puedes guardar solo el término.'}
       </p>
 
-      <WordForm submitLabel="Guardar palabra" onSubmit={handleSubmit} provider={provider} />
+      <WordForm
+        submitLabel="Guardar palabra"
+        onSubmit={handleSubmit}
+        provider={provider}
+      />
     </section>
   );
 }

@@ -23,7 +23,7 @@
 - **Backend / Hosting:** **Firebase**
   - **Firebase Hosting** para el deploy.
   - **Firestore** para guardar las palabras de cada usuario.
-  - **Firebase Authentication** para el login (Google + enlace por correo / *magic link*).
+  - **Firebase Authentication** para el login (Google + enlace por correo / _magic link_).
 - **Definiciones automáticas:** **API de diccionario gratuita** (sin IA). Módulo intercambiable `DefinitionProvider`. Por defecto: `dictionaryapi.dev` en español.
 
 > Decisiones respecto a la versión anterior: (1) sin IA — solo APIs de diccionario gratuitas; (2) datos en Firestore en la nube (no solo local); (3) login real multiusuario.
@@ -37,8 +37,8 @@ Módulo enchufable para no amarrarse a un solo diccionario:
 ```ts
 interface DefinitionResult {
   definition: string;
-  example: string;     // puede venir vacío según la fuente
-  synonyms: string[];  // puede venir vacío según la fuente
+  example: string; // puede venir vacío según la fuente
+  synonyms: string[]; // puede venir vacío según la fuente
 }
 
 interface DefinitionProvider {
@@ -48,6 +48,7 @@ interface DefinitionProvider {
 ```
 
 **Proveedor por defecto — Free Dictionary API** (`dictionaryapi.dev`):
+
 - `GET https://api.dictionaryapi.dev/api/v2/entries/es/{term}`
 - Gratis, sin API key, sin registro → **no hay secreto que proteger** en este punto.
 - Mapear la primera acepción a `definition`; rellenar `example`/`synonyms` si vienen.
@@ -77,20 +78,21 @@ type Word = {
   definition: string;
   example: string;
   synonyms: string[];
-  source?: string;        // libro / autor (opcional)
+  source?: string; // libro / autor (opcional)
   createdAt: number;
   // Repaso espaciado (SM-2 simplificado):
-  easeFactor: number;     // arranca en 2.5
-  interval: number;       // días al próximo repaso
-  dueDate: number;        // timestamp del próximo repaso
+  easeFactor: number; // arranca en 2.5
+  interval: number; // días al próximo repaso
+  dueDate: number; // timestamp del próximo repaso
   reviewsCount: number;
   lapses: number;
 };
 
-type UserSettings = {        // users/{uid} o users/{uid}/settings/app
+type UserSettings = {
+  // users/{uid} o users/{uid}/settings/app
   definitionProvider: 'dictionary' | 'manual';
   notificationsEnabled: boolean;
-  notificationTime: string;    // "08:00"
+  notificationTime: string; // "08:00"
   wordsPerNotification: number; // 1-3
 };
 ```
@@ -153,6 +155,7 @@ Dos métodos con Firebase Auth:
 
 **US-00 · Iniciar sesión sencillo**
 Como usuaria quiero entrar con Google o con un enlace a mi correo, para usar la app sin crear contraseñas.
+
 - CA1: Pantalla de login con "Continuar con Google" y campo de correo + "Enviarme enlace".
 - CA2: Con Google entro en un toque; con correo recibo un enlace que me autentica al abrirlo.
 - CA3: Al primer ingreso se crea mi perfil `users/{uid}`.
@@ -163,6 +166,7 @@ Como usuaria quiero entrar con Google o con un enlace a mi correo, para usar la 
 
 **US-01 · Agregar palabra con autocompletado (diccionario gratis)**
 Como lectora quiero escribir una palabra y que la app traiga su definición (y si hay, ejemplo y sinónimos) desde una API de diccionario gratuita, para no buscarla a mano.
+
 - CA1: En "Agregar" hay campo de texto y botón "Buscar definición".
 - CA2: Indicador de carga; luego se rellenan los campos (editables).
 - CA3: Si la fuente no trae ejemplo/sinónimos, los dejo vacíos para llenar a mano.
@@ -171,10 +175,12 @@ Como lectora quiero escribir una palabra y que la app traiga su definición (y s
 
 **US-02 · Editar antes de guardar**
 Como usuaria quiero ajustar la definición o poner la frase del libro, para personalizar el aprendizaje.
+
 - CA1: Todos los campos son editables; campo opcional "libro/autor".
 
 **US-03 · Captura rápida**
 Como lectora quiero guardar solo la palabra y completarla después, para no cortar la lectura.
+
 - CA1: Puedo guardar con solo el término.
 - CA2: Las incompletas se marcan en "Mis palabras" con botón "Completar".
 
@@ -187,6 +193,7 @@ Como lectora quiero guardar solo la palabra y completarla después, para no cort
 ### Épica C — Recordar (repaso espaciado)
 
 **US-06 · Repaso con flashcards**
+
 - CA1: Solo palabras con `dueDate <= hoy`.
 - CA2: Veo la palabra; al tocar se voltea (definición + ejemplo).
 - CA3: Califico "La sabía" / "Más o menos" / "No la sabía".
@@ -198,15 +205,17 @@ Como lectora quiero guardar solo la palabra y completarla después, para no cort
 ### Épica D — Practicar y notificaciones
 
 **US-08 · Mini-juego "adivina la palabra"**
+
 - CA1: Opción múltiple: una definición y 4 palabras de mi lista.
 - CA2: Marca correcto/incorrecto y lleva puntaje.
 - CA3: (Opcional) Modo "escribe una frase" usando la palabra.
 
 **US-09 · Notificaciones de palabra del día**
+
 - CA1: En Ajustes activo/desactivo, elijo hora y cantidad (1–3).
 - CA2: A la hora llega notificación con término + definición.
 - CA3: Tocarla abre el detalle de esa palabra.
-- Nota técnica: PWA usa Service Worker + Notifications API; para notificaciones *push* reales con horario conviene FCM (Firebase Cloud Messaging). En iOS requieren PWA instalada y permisos.
+- Nota técnica: PWA usa Service Worker + Notifications API; para notificaciones _push_ reales con horario conviene FCM (Firebase Cloud Messaging). En iOS requieren PWA instalada y permisos.
 
 ### Épica E — PWA / plataforma
 

@@ -1,7 +1,19 @@
 type IconName =
-  | 'menu' | 'home' | 'plus' | 'book' | 'review' | 'play'
-  | 'settings' | 'search' | 'sun' | 'moon' | 'chevron-left'
-  | 'chevron-right' | 'bell' | 'x' | 'sparkle';
+  | 'menu'
+  | 'home'
+  | 'plus'
+  | 'book'
+  | 'review'
+  | 'play'
+  | 'settings'
+  | 'search'
+  | 'sun'
+  | 'moon'
+  | 'chevron-left'
+  | 'chevron-right'
+  | 'bell'
+  | 'x'
+  | 'sparkle';
 
 const PATHS: Record<IconName, string> = {
   menu: 'M4 6h16M4 12h16M4 18h16',
@@ -27,7 +39,8 @@ const PATHS: Record<IconName, string> = {
   'chevron-right': 'M9 18l6-6-6-6',
   bell: 'M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0',
   x: 'M18 6L6 18M6 6l12 12',
-  sparkle: 'M12 3l1.9 5.6a2 2 0 001.5 1.3L21 12l-5.6 1.9a2 2 0 00-1.3 1.5L12 21l-1.9-5.6a2 2 0 00-1.3-1.5L3 12l5.6-1.9a2 2 0 001.5-1.3z',
+  sparkle:
+    'M12 3l1.9 5.6a2 2 0 001.5 1.3L21 12l-5.6 1.9a2 2 0 00-1.3 1.5L12 21l-1.9-5.6a2 2 0 00-1.3-1.5L3 12l5.6-1.9a2 2 0 001.5-1.3z',
 };
 
 interface Props {

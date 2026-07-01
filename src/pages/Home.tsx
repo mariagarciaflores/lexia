@@ -106,9 +106,7 @@ export default function Home() {
                       <p>“{w.example}”</p>
                     </div>
                   )}
-                  {w.source && (
-                    <span className="wotd__source">{w.source}</span>
-                  )}
+                  {w.source && <span className="wotd__source">{w.source}</span>}
                 </Link>
               ))}
             </div>

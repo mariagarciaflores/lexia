@@ -8,9 +8,7 @@ export * from './types';
 // Datamuse, etc.) basta con registrarla aquí.
 export const PROVIDERS: DefinitionProvider[] = [freeDictionaryProvider, manualProvider];
 
-const byId = new Map<ProviderId, DefinitionProvider>(
-  PROVIDERS.map((p) => [p.id, p]),
-);
+const byId = new Map<ProviderId, DefinitionProvider>(PROVIDERS.map((p) => [p.id, p]));
 
 export function getProvider(id: ProviderId): DefinitionProvider {
   return byId.get(id) ?? freeDictionaryProvider;

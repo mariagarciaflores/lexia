@@ -50,14 +50,18 @@ export default function WordForm({
       setExample(result.example);
       setSynonyms(result.synonyms.join(', '));
       if (!result.example && result.synonyms.length === 0) {
-        setLookupMsg('Definición encontrada. Sin ejemplo ni sinónimos: complétalos a mano.');
+        setLookupMsg(
+          'Definición encontrada. Sin ejemplo ni sinónimos: complétalos a mano.',
+        );
       }
     } catch (err) {
       if (err instanceof WordNotFoundError) {
         setLookupMsg('No se encontró esa palabra. Escribe la definición a mano.');
       } else {
         console.error(err);
-        setLookupMsg('No se pudo consultar el diccionario. Inténtalo de nuevo o escríbela a mano.');
+        setLookupMsg(
+          'No se pudo consultar el diccionario. Inténtalo de nuevo o escríbela a mano.',
+        );
       }
     } finally {
       setLookingUp(false);
@@ -161,11 +165,20 @@ export default function WordForm({
       )}
 
       <div className="word-form__actions">
-        <button className="btn btn--primary" type="submit" disabled={busy || !term.trim()}>
+        <button
+          className="btn btn--primary"
+          type="submit"
+          disabled={busy || !term.trim()}
+        >
           {busy ? 'Guardando…' : submitLabel}
         </button>
         {onCancel && (
-          <button className="btn btn--ghost" type="button" onClick={onCancel} disabled={busy}>
+          <button
+            className="btn btn--ghost"
+            type="button"
+            onClick={onCancel}
+            disabled={busy}
+          >
             Cancelar
           </button>
         )}

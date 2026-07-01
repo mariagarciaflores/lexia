@@ -10,7 +10,8 @@ import {
 const ENDPOINT = 'https://es.wiktionary.org/w/api.php';
 
 // Líneas de metadatos que NO son la definición (sinónimos, ámbito, ejemplo, etc.).
-const META = /^(Sinónimos?|Antónimos?|Hi(?:pó|per)\w+|Uso|Ámbito|Ejemplos?|Relacionados?|Derivados?|Véase):/i;
+const META =
+  /^(Sinónimos?|Antónimos?|Hi(?:pó|per)\w+|Uso|Ámbito|Ejemplos?|Relacionados?|Derivados?|Véase):/i;
 // Cabecera de acepción: "1", "4 Informática", "1 Mamíferos, perros".
 const SENSE = /^\d+(?:\s+[^.]{0,40})?$/;
 

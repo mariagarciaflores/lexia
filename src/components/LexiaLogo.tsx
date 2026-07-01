@@ -34,8 +34,14 @@ export default function LexiaLogo({ size = 32 }: Props) {
         strokeLinecap="round"
       />
       {/* Hojas del brote */}
-      <path d="M24 13 C20.5 12.5 18 10 18.8 7 C21.2 8.4 23.2 10.6 24 13 Z" fill="#6d9f71" />
-      <path d="M24 13 C27.5 12.5 30 10 29.2 7 C26.8 8.4 24.8 10.6 24 13 Z" fill="#337357" />
+      <path
+        d="M24 13 C20.5 12.5 18 10 18.8 7 C21.2 8.4 23.2 10.6 24 13 Z"
+        fill="#6d9f71"
+      />
+      <path
+        d="M24 13 C27.5 12.5 30 10 29.2 7 C26.8 8.4 24.8 10.6 24 13 Z"
+        fill="#337357"
+      />
     </svg>
   );
 }

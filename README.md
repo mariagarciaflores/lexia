@@ -38,12 +38,12 @@ Para que el login funcione en tu proyecto Firebase:
 
 ## Scripts
 
-| Comando           | Qué hace                                  |
-| ----------------- | ----------------------------------------- |
-| `npm run dev`     | Servidor de desarrollo (Vite)             |
-| `npm run build`   | Compila TypeScript y genera `dist/`       |
-| `npm run preview` | Sirve el build de producción localmente   |
-| `npm run deploy`  | Build + `firebase deploy`                 |
+| Comando           | Qué hace                                |
+| ----------------- | --------------------------------------- |
+| `npm run dev`     | Servidor de desarrollo (Vite)           |
+| `npm run build`   | Compila TypeScript y genera `dist/`     |
+| `npm run preview` | Sirve el build de producción localmente |
+| `npm run deploy`  | Build + `firebase deploy`               |
 
 ## Despliegue en Firebase
 
@@ -61,10 +61,10 @@ La palabra del día llega por **FCM** y la envía una **Cloud Function programad
 
 **Requisitos previos:**
 
-1. **Plan Blaze** (Cloud Functions y Scheduler lo exigen): Console → *Uso y
-   facturación* → *Modificar plan* → Blaze.
-2. **Clave Web Push (VAPID):** Console → *Configuración del proyecto* → *Cloud
-   Messaging* → *Web Push certificates* → *Generar par de claves*. Cópiala en
+1. **Plan Blaze** (Cloud Functions y Scheduler lo exigen): Console → _Uso y
+   facturación_ → _Modificar plan_ → Blaze.
+2. **Clave Web Push (VAPID):** Console → _Configuración del proyecto_ → _Cloud
+   Messaging_ → _Web Push certificates_ → _Generar par de claves_. Cópiala en
    `.env` como `VITE_FIREBASE_VAPID_KEY` (es pública).
 
 **Despliegue de las funciones:**

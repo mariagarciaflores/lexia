@@ -55,7 +55,9 @@ export default function Review() {
     return (
       <Screen>
         <div className="empty">
-          <p className="empty__text">¡Sin pendientes! No hay palabras para repasar hoy.</p>
+          <p className="empty__text">
+            ¡Sin pendientes! No hay palabras para repasar hoy.
+          </p>
           <Link to="/agregar" className="btn btn--primary">
             Agregar palabras
           </Link>

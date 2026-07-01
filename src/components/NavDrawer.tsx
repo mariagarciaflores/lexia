@@ -50,7 +50,8 @@ export default function NavDrawer({ open, onClose }: Props) {
         <div className="drawer__theme">
           <button
             className={
-              'drawer__theme-btn' + (theme === 'light' ? ' drawer__theme-btn--active' : '')
+              'drawer__theme-btn' +
+              (theme === 'light' ? ' drawer__theme-btn--active' : '')
             }
             onClick={() => theme !== 'light' && toggle()}
           >
@@ -72,9 +73,7 @@ export default function NavDrawer({ open, onClose }: Props) {
           <span className="drawer__avatar">{initials}</span>
           <div className="drawer__user-info">
             <strong className="drawer__user-name">{displayName}</strong>
-            {user?.email && (
-              <span className="drawer__user-email">{user.email}</span>
-            )}
+            {user?.email && <span className="drawer__user-email">{user.email}</span>}
           </div>
         </div>
       </nav>

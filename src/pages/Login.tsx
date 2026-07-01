@@ -55,8 +55,8 @@ export default function Login() {
       {emailSent ? (
         <div className="login__actions">
           <p className="login__sent">
-            Te enviamos un enlace a <strong>{email}</strong>. Ábrelo en este
-            dispositivo para entrar sin contraseña.
+            Te enviamos un enlace a <strong>{email}</strong>. Ábrelo en este dispositivo
+            para entrar sin contraseña.
           </p>
           <button
             className="btn btn--ghost"

@@ -1,6 +1,12 @@
 import { useState } from 'react';
 import WordForm from './WordForm';
-import { deleteWord, isIncomplete, updateWord, type Word, type WordInput } from '../db/words';
+import {
+  deleteWord,
+  isIncomplete,
+  updateWord,
+  type Word,
+  type WordInput,
+} from '../db/words';
 
 type Props = {
   uid: string;
@@ -65,9 +71,7 @@ export default function WordDetail({ uid, word, onClose }: Props) {
               </p>
             )}
 
-            {word.source && (
-              <p className="detail__row detail__source">{word.source}</p>
-            )}
+            {word.source && <p className="detail__row detail__source">{word.source}</p>}
 
             <div className="word-form__actions">
               <button className="btn btn--primary" onClick={() => setEditing(true)}>
