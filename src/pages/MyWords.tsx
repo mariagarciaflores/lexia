@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../auth/useAuth';
 import { useWords } from '../db/useWords';
@@ -10,10 +10,25 @@ type SortKey = 'recientes' | 'alfabetico';
 export default function MyWords() {
   const { user } = useAuth();
   const { words, loading, error } = useWords();
-  const [search, setSearch] = useState('');
   const [sort, setSort] = useState<SortKey>('recientes');
   const [selected, setSelected] = useState<Word | null>(null);
   const [searchParams, setSearchParams] = useSearchParams();
+  const searchInput = useRef<HTMLInputElement>(null);
+
+  // El término de búsqueda vive en la URL (?q=) para que el buscador global
+  // (AppBar / TopBar) y el de esta pantalla compartan estado.
+  const search = searchParams.get('q') ?? '';
+  function setSearch(value: string) {
+    setSearchParams(
+      (prev) => {
+        const next = new URLSearchParams(prev);
+        if (value) next.set('q', value);
+        else next.delete('q');
+        return next;
+      },
+      { replace: true },
+    );
+  }
 
   // Si se llega con ?word=<id> (al tocar una notificación), abre ese detalle.
   const wordParam = searchParams.get('word');
@@ -22,9 +37,36 @@ export default function MyWords() {
     const match = words.find((w) => w.id === wordParam);
     if (match) {
       setSelected(match);
-      setSearchParams({}, { replace: true });
+      // Quita solo 'word', conservando un posible 'q'.
+      setSearchParams(
+        (prev) => {
+          const next = new URLSearchParams(prev);
+          next.delete('word');
+          return next;
+        },
+        { replace: true },
+      );
     }
   }, [wordParam, words, setSearchParams]);
+
+  // Al llegar desde la lupa del AppBar (?focus=1), enfoca el buscador y limpia el flag.
+  const focusParam = searchParams.get('focus');
+  useEffect(() => {
+    if (!focusParam) return;
+    if (searchInput.current) {
+      searchInput.current.focus();
+    } else if (loading) {
+      return; // espera a que carguen las palabras y se monte el buscador
+    }
+    setSearchParams(
+      (prev) => {
+        const next = new URLSearchParams(prev);
+        next.delete('focus');
+        return next;
+      },
+      { replace: true },
+    );
+  }, [focusParam, loading, setSearchParams]);
 
   const visible = useMemo(() => {
     const q = search.trim().toLowerCase();
@@ -65,6 +107,7 @@ export default function MyWords() {
       {!loading && words.length > 0 && (
         <div className="toolbar">
           <input
+            ref={searchInput}
             className="input"
             type="search"
             placeholder="Buscar palabra o definición"
